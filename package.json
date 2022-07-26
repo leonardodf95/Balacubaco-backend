@@ -1,0 +1,10 @@
+{
+  "name": "balacubacu-backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "balacubaco-group",
+  "license": "MIT",
+  "dependencies": {
+    "nodemon": "^2.0.19"
+  }
+}
