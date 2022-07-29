@@ -1,4 +1,4 @@
-import {Router} from 'express'
+/*import {Router} from 'express'
 import CourseController from '../controllers/CoursesController.js'
 
 const courses = Router()
@@ -29,3 +29,4 @@ courses.delete('/', async(req, res) =>{
 })
 
 export default courses
+*/

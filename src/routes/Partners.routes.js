@@ -1,31 +1,28 @@
-import {Router} from 'express'
-import CourseController from '../controllers/CoursesController.js'
+const { Router } = require('express');
+//import courses from './Courses.routes.js'
+const PartnerController = require('../controllers/PartnerController')
 
-const courses = Router()
+//importando o Router do Express para obter os metodos existentes pra criacao de rotas (get, post, put, delete)
+const router = Router()
+
+//vai ter que passar na rota um parametro "id"
+router.get('/partners/:id', PartnerController.findByUuid);
+router.get('/partners', PartnerController.findAllPartners);
+router.post('/partners/create', PartnerController.createPartner);
+router.put('/partners/update', PartnerController.updatePartner);
+router.delete('/partners/delete', PartnerController.deletePartner);
 
 
-courses.get('/', async(request, response)=>{
-    const data = await CourseController.listAllCourses()
-    return response.send(data).status(200)
-})
 
-courses.post('/', async(req, res) =>{
-    try {
-        const data = await CourseController.createCourse(req.body)
-        res.status(201).send(data)        
-    } catch (error) {
-        res.status(400).send(error.message)
-    }
-})
+//TESTES
+router.get('/', (request, response)=> response.status(200).send({mensagem: "ola mundo"}));
+router.post('/body', async(request, response) => {
+        const { name, age } = request.body;
+        const user = { name, age }
+    
+        return response.status(200).json(user); // Retorna o usuário recém criado
+    })
 
-courses.delete('/', async(req, res) =>{
-    try {
-        const {id} = req.query
-        const data = await CourseController.deleteCourse(id)
-        res.status(200).send(data)
-    } catch (error) {
-        res.status(400).send(error.message)
-    }
-})
 
-export default courses
+//partner do Router()
+module.exports = router

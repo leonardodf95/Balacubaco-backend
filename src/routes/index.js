@@ -1,10 +1,14 @@
-import {Router} from 'express';
-import courses from './Courses.routes.js'
+ const {Router} = require('express');
+//import courses from './Courses.routes.js'
+const partnerRoutes = require('./Partners.routes.js')
 
 const routes = Router()
 
 // routes.use('/user')
-routes.use('/courses', courses)
+//routes.use('/courses', courses)
+routes.use(partnerRoutes)
 
 
-export default routes
+//export default routes
+
+module.exports = routes

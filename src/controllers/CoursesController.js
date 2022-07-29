@@ -1,11 +1,11 @@
-import Course from "../models/Courses.js";
+/*import Course from "../models/Courses.js";
 import db from '../config/dbConfig.cjs';
 
 export default class CourseController{
     static async createCourse({ name, description, theme, url }){
         try {
             const course = new Course(name, description, theme, url)
-
+req.body 
             const {rows} = await db.query("INSERT INTO courses (id, name, description, url) VALUES ($1, $2, $3, $4)", [course.id, course.name, course.description, course.url])
 
             console.log('course', course)
@@ -38,3 +38,4 @@ export default class CourseController{
         }
     }
 }
+*/

@@ -1,4 +1,4 @@
-import {v4} from 'uuid'
+/*import {v4} from 'uuid'
 
 export default class Course{
     id;
@@ -36,3 +36,4 @@ export default class Course{
         this.tags = this.tags.filter((tags)=> {return tags.toLowerCase() !== tag.toLowerCase()})
     }
 }
+*/
