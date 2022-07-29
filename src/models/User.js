@@ -1,23 +1,22 @@
-//const bcrypt = req ('bcrypt-nodejs')
-
-/*import {v4} from 'uuid'
-
-export default class User{
-    id;
-    name;
-    email;
-    password;
-    interests;
-    courses;
-    
-    constructor(name, email, password, interests, courses){
-        this.id = v4(),
-        this.name = name,
-        this.email = email,
-        this.theme = theme,
-        this.url = url,
-        this.tags = [],
-        this.likes = []
+'use strict';
+const {
+  Model
+} = require('sequelize');
+module.exports = (sequelize, DataTypes) => {
+  class User extends Model {
+    static associate(models) {
+      // define association here
     }
-
-}*/
+  }
+  User.init({
+    name: DataTypes.STRING,
+    email: DataTypes.STRING,
+    password: DataTypes.STRING,
+    interests: DataTypes.STRING,
+    courses: DataTypes.STRING
+  }, {
+    sequelize,
+    modelName: 'User',
+  });
+  return User;
+};

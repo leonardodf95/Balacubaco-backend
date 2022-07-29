@@ -1,44 +1,11 @@
-/*
-
-
-async login(req,res){
-  const { email, senha } = req.body;
-  User.findOne({email_usuario: email}, function(err,user){
-      if(err){
-          console.log(err);
-          res.status(200).json({erro: "Erro no servidor. Por favor, tente novamente"});
-      }else if (!user){
-          res.status(200).json({status:2, error: 'E-mail não encontrado no banco de dados'});
-      }else{
-        user.isCorrectPassword(password,async function (err,same){
-          if(err){
-            res.status(200).json({error:"Erro no servidor. Por favor, tente novamente!"});
-          }else if(!same){
-            res.status(200).json({status:2, error:"A senha não confere!"})
-          }else {
-            const payload = { email };
-            
-        })
-               
-      }
-    })
-  }*/
-
-
-
-
-
-
-
-
-/*const userdb = require('../models/user.js');
+const userdb = require('../models');
 
 class UserController{
     
     static async findAllUsers(req, res) {
         try {
-            const users = await userdb.User.findAll()
-            return res.status(200).json(findAll)
+            const users = await userdb.Users.findAll()
+            return res.status(200).json(users)
         } catch (error) {
             return res.status(400).json(error.message)
         }
@@ -57,10 +24,10 @@ class UserController{
     }
 
     static async createUser (req, res) {
-        const newUser {id, name, email, password} = req.body;
+        const{name, email, password} = req.body;
 
         try {
-            const user = await partnerdb.create(newUser)
+            const user = await partnerdb.create({name, email, password})
             return res.status(200).json(user)
         } catch (error) {
             return res.status(400).json(error.message)
@@ -68,7 +35,6 @@ class UserController{
     }
 
     static async updateUser (req, res) {
-        const { id, name, email, password } = req.params;
         const changes = req.body
 
         try {
@@ -91,8 +57,31 @@ class UserController{
         }
     }
 
-    }
 }
 
+module.exports = UserController
 
-module.exports = PartnerController*/
+
+/*
+async login(req,res){
+    const { email, senha } = req.body;
+    User.findOne({email_usuario: email}, function(err,user){
+        if(err){
+            console.log(err);
+            res.status(200).json({erro: "Erro no servidor. Por favor, tente novamente"});
+        }else if (!user){
+            res.status(200).json({status:2, error: 'E-mail não encontrado no banco de dados'});
+        }else{
+          user.isCorrectPassword(password,async function (err,same){
+            if(err){
+              res.status(200).json({error:"Erro no servidor. Por favor, tente novamente!"});
+            }else if(!same){
+              res.status(200).json({status:2, error:"A senha não confere!"})
+            }else {
+              const payload = { email };
+              
+          })
+                 
+        }
+      })
+    }*/
