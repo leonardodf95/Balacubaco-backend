@@ -1,6 +1,6 @@
 /*import {v4} from 'uuid'
 
-export default class Course{
+export default class Partner{
     id;
     name;
     description;
