@@ -11,5 +11,7 @@ router.post('/users/create', UserController.createUser);
 router.put('/users/update', UserController.updateUser);
 router.delete('/users/delete', UserController.deletUser);
 
+router.get('/teste', UserController.teste);
+
 //partner do Router()
 module.exports = router
