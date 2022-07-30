@@ -1,39 +1,48 @@
-/*import {v4} from 'uuid'
+'use strict';
+const { Sequelize, DataTypes } = require('sequelize');
+const { Model } = Sequelize
+class Course extends Model{
+  static init(sequelize) {
+    super.init({
+      course_id: {
+        primaryKey: true,
+        type: DataTypes.INTEGER,
+      },
+      name: DataTypes.STRING,
+      description: DataTypes.STRING,
+      url: DataTypes.STRING,
+      theme: DataTypes.STRING,
+      photo: DataTypes.STRING,
+      tags: DataTypes.STRING,
+      likes: DataTypes.STRING
+    }, {
+      sequelize,
+    })
 
-export default class Course{
-    id;
-    name;
-    description;
-    url;
-    theme;
-    photo;
-    tags;
-    likes;
-    constructor(name, description, theme, url){
-        this.id = v4(),
-        this.name = name,
-        this.description = description,
-        this.theme = theme,
-        this.url = url,
-        this.tags = [],
-        this.likes = []
-    }
+    return this
+  }
 
-    static async like(id){
-        this.likes.push(id)
-    }
+  static associate(models) {
+    console.log(models)
+    // this.belongsTo(models.Partner, { foreignKey: 'partner_id' });
+  }
 
-    static async addTags(tag){
-        this.tags.push(tag)
-    }
-    
+  static async like(id){
+    this.likes.push(id)
+  }
 
-    static async deslike(id){
-        this.likes = this.likes.filter((likeID)=> {return likeID.toLowerCase() !== id.toLowerCase()})
-    }
+  static async addTags(tag){
+    this.tags.push(tag)
+  }
 
-    static async removeTag(tag){
-        this.tags = this.tags.filter((tags)=> {return tags.toLowerCase() !== tag.toLowerCase()})
-    }
+  static async deslike(id){
+    this.likes = this.likes.filter((likeID)=> {return likeID.toLowerCase() !== id.toLowerCase()})
+  }
+
+  static async removeTag(tag){
+    this.tags = this.tags.filter((tags)=> {return tags.toLowerCase() !== tag.toLowerCase()})
+  }
+
 }
-*/
+
+module.exports = Course

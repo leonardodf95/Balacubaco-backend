@@ -1,32 +1,10 @@
-/*import {Router} from 'express'
-import CourseController from '../controllers/CoursesController.js'
+const { Router } = require('express');
+const CoursesController = require('../controllers/CoursesController')
 
-const courses = Router()
+const router = Router()
 
+router.get('/courses', CoursesController.listAllCourses);
+router.post('/courses/create', CoursesController.createCourse);
+router.delete('/courses/delete/:id', CoursesController.deleteCourse);
 
-courses.get('/', async(request, response)=>{
-    const data = await CourseController.listAllCourses()
-    return response.send(data).status(200)
-})
-
-courses.post('/', async(req, res) =>{
-    try {
-        const data = await CourseController.createCourse(req.body)
-        res.status(201).send(data)        
-    } catch (error) {
-        res.status(400).send(error.message)
-    }
-})
-
-courses.delete('/', async(req, res) =>{
-    try {
-        const {id} = req.query
-        const data = await CourseController.deleteCourse(id)
-        res.status(200).send(data)
-    } catch (error) {
-        res.status(400).send(error.message)
-    }
-})
-
-export default courses
-*/
+module.exports = router

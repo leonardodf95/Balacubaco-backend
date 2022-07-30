@@ -1,10 +1,10 @@
-const database = require('../models');
+    const Partner = require('../models/Partner');
 
 class PartnerController{
     
     static async findAllPartners(req, res) {
         try {
-            const partners = await database.Partners.findAll();
+            const partners = await Partner.findAll();
             return res.status(200).json(partners);
         } catch (error) {
             return res.status(400).json(error.message);
@@ -13,11 +13,8 @@ class PartnerController{
 
     static async findByUuid(req, res) {
         const { id } = req.params
-    
-
         try {
-            //onde a coluna id do banco for igual ao id.req.params
-            const partner = await database.Partner.findOne( { where: { id: Number(id) } } )
+            const partner = await Partner.findOne({ where: { partner_id: id } })
             return res.status(200).json(partner)
         } catch (error) {
             return res.status(500).json(error.message)
@@ -25,10 +22,9 @@ class PartnerController{
     }
 
     static async createPartner(req, res) {
-        const newPartner = req.body
-
+        const {partner_id, partner_name, cnpj, password} = req.body
         try {
-            const partner = await database.Partner.create(newPartner)
+            const partner = await Partner.create({partner_id, partner_name, cnpj, password})
             return res.status(200).json(partner)
         } catch (error) {
             return res.status(400).json(error.message)
@@ -37,12 +33,11 @@ class PartnerController{
 
     static async updatePartner(req, res) {
         const { id } = req.params
-        const changes = req.body
-
+        const {partner_id, partner_name, cnpj, password} = req.body
         try {
-            const partner = await partnerdb.update(changes, { where: { id: Number(id) } } )
-            const changedPartner = await partnerdb.findOne( { where: { id: Number(id) } } )
-            return res.status(200).json(changedPartner)
+            await Partner.update({partner_id, partner_name, cnpj, password}, { where: { partner_id: id } } )
+            const changes = await Partner.findOne({ where: { partner_id: id } })
+            return res.status(200).json(changes)
         } catch (error) {
             return res.status(400).json(error.message)
         }
@@ -50,15 +45,13 @@ class PartnerController{
 
     static async deletePartner(req, res) {
         const { id } = req.params
-
         try {
-            const partner = await partnerdb.destroy(changes, { where: { id: Number(id) } } )
-            return res.status(200).json({ data: `o partner do id ${id} foi deletado!!`} )
+            await Partner.destroy({ where: { partner_id: id } })
+            return res.status(200).json({ data: `o partner_id ${id} foi deletado!!`} )
         } catch (error) {
             return res.status(400).json(error.message)
         }
     }
 }
-
 
 module.exports = PartnerController

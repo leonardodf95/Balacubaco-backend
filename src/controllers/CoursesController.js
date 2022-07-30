@@ -1,41 +1,35 @@
-/*import Course from "../models/Courses.js";
-import db from '../config/dbConfig.cjs';
+const Course = require('../models/Courses');
 
 export default class CourseController{
+
     static async createCourse({ name, description, theme, url }){
+        const{course_id, course_name, course_description, course_url} = req.body 
+        console.log('course', course)
+        console.log('rows', rows)
         try {
-            const course = new Course(name, description, theme, url)
-req.body 
-            const {rows} = await db.query("INSERT INTO courses (id, name, description, url) VALUES ($1, $2, $3, $4)", [course.id, course.name, course.description, course.url])
-
-            console.log('course', course)
-            console.log('rows', rows)
-
-            return course
-            
+            const newCourse = await Course.create({course_id, course_name, course_description, course_url})
+            return res.status(200).json(newUser)
         } catch (error) {
-            console.log('error', error)
-        } 
+            return res.status(400).json(error.message)
+        }
     }
 
-    static async listAllCourses(){
+    static async listAllCourses(req, res){
         try {
-            const response = await db.query('SELECT * from courses ORDER BY name')
-            return response.rows
+            const courses = await Course.findAll()
+            return res.status(200).json(courses)
         } catch (error) {
             console.log('error', error)
         }
     }
 
     static async deleteCourse(id){
+        const { id } = req.params;
         try {
-            const {rows} = await db.query('SELECT * from courses where id = $1', [id])
-            const deleteCourse = await db.query("DELETE FROM courses where id = $1", [id])
-            console.log('rows', rows)
-            return rows
+            await Course.destroy({ where: { course_id: id } })
+            return res.status(200).json({ data: `o course_id ${id} foi deletado!`} )
         } catch (error) {
-            console.log('error', error)
+            return res.status(400).json(error.message)
         }
     }
 }
-*/

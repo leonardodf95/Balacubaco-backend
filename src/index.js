@@ -1,10 +1,11 @@
-// import express from "express";
-// import cors from 'cors';
-// import bodyParser from 'body-parser';
+ //import express from "express";
+ //import cors from 'cors';
+ //import bodyParser from 'body-parser';
+
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-
+require('./models')
 
 const routes = require('./routes/index.js');
 
@@ -15,7 +16,7 @@ app.use(express.json())
 app.use(bodyParser.json())
 app.use(routes)
 
-const PORT = process.env.PORT || 3333;
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, ()=>{console.info(`App is running on port ${PORT}`)})
 
